@@ -97,4 +97,29 @@ public class TodoTaskController : BaseController<CreateTodoTaskCommand, TodoTask
 
         return Ok(updateResult);
     }
+
+
+    /// <summary>
+    /// Deletes a TodoTask
+    /// </summary>
+    /// <param name="Id"></param>
+    /// <param name="services"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    [Produces("application/json")]
+    [ProducesResponseType(typeof(ActionResult<Result>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [SwaggerResponse(201, "The execution was successful")]
+    [SwaggerResponse(400, "The request was invalid")]
+    [HttpGet("{Id}")]
+    [MapToApiVersion("1.0")]
+    public override async Task<ActionResult<Result>> Delete(int Id, [FromServices] TodoTaskServices services, CancellationToken cancellationToken)
+    {
+        var deleteCommand = new DeleteTodoTaskCommand(Id);
+
+
+        var deleteResult = await _mediator.Send(deleteCommand, cancellationToken);
+
+        return Ok(deleteResult);
+    }
 }

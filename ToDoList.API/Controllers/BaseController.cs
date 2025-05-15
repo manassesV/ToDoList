@@ -32,4 +32,7 @@ public abstract class BaseController<TCommand, TServices, TResult>: ControllerBa
         [FromBody] TCommand commmand,
         [FromServices] TServices services,
         CancellationToken cancellationToken);
+    public abstract Task<ActionResult<TResult>> Delete(int id,
+      [FromServices] TServices services,
+      CancellationToken cancellationToken);
 }
