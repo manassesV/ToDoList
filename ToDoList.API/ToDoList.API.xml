@@ -31,7 +31,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:ToDoList.API.Controllers.TodoTaskController.Update(ToDoList.Application.Commands.CreateTodoTaskCommand,ToDoList.API.Services.TodoTaskServices,System.Threading.CancellationToken)">
+        <member name="M:ToDoList.API.Controllers.TodoTaskController.Update(System.Int32,ToDoList.Application.Commands.CreateTodoTaskCommand,ToDoList.API.Services.TodoTaskServices,System.Threading.CancellationToken)">
             <summary>
             Updates a TodoTask
             </summary>

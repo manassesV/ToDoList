@@ -11,14 +11,15 @@ public static class GlobalExtension
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
-        services.AddCors(options =>
+        builder.Services.AddCors(options =>
         {
+
             options.AddPolicy("AllowAll",
                 builder =>
                 {
                     builder.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader();
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
                 });
         });
 
@@ -33,7 +34,7 @@ public static class GlobalExtension
         services.AddApiVersionConfiguration();
         services.AddApplication();
         services.AddInfrastructure(builder.Configuration.GetConnectionString("todolistdb"));
-        
+
         return builder;
     }
 }

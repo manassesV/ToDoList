@@ -28,6 +28,7 @@ public abstract class BaseController<TCommand, TServices, TResult>: ControllerBa
         [FromServices] TServices services,
         CancellationToken cancellationToken);
     public abstract Task<ActionResult<TResult>> Update(
+        int Id,
         [FromBody] TCommand commmand,
         [FromServices] TServices services,
         CancellationToken cancellationToken);

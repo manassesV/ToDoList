@@ -1,6 +1,6 @@
 ﻿namespace ToDoList.Application.Commands;
 
-public class UpdateTodoTaskCommandHandler : IRequestHandler<CreateTodoTaskCommand, Result>
+public class UpdateTodoTaskCommandHandler : IRequestHandler<UpdateTodoTaskCommand, Result>
 {
     private readonly ITodoTaskRepository _todoTaskRepository;
     private readonly ILogger<CreateTodoTaskCommandHandler> _logger;
@@ -11,7 +11,7 @@ public class UpdateTodoTaskCommandHandler : IRequestHandler<CreateTodoTaskComman
         _todoTaskRepository = todoTaskRepository;
         _logger = logger;
     }
-    public async Task<Result> Handle(CreateTodoTaskCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(UpdateTodoTaskCommand request, CancellationToken cancellationToken)
     {
         try
         {
@@ -28,7 +28,7 @@ public class UpdateTodoTaskCommandHandler : IRequestHandler<CreateTodoTaskComman
                 return Result.Failure(errorMessages);
             }
 
-            _todoTaskRepository.Add(todoTask);
+            _todoTaskRepository.Update(todoTask);
             var saveSucced = await _todoTaskRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
            
 

@@ -9,7 +9,7 @@ public class TodoTaskQueries(ToDoListDbContext context,
         {
             var todoTasks = await context.TodoTasks
                 .AsNoTracking()
-                .Select(x => new TodoTaskViewModel(x.Name, x.Description, x.DueDate, x.Status ))
+                .Select(x => new TodoTaskViewModel(x.Id, x.Name, x.Description, x.DueDate, x.Status ))
                 .ToListAsync(cancellationToken);
 
             return Result<IEnumerable<TodoTaskViewModel>>.Success(todoTasks);
@@ -26,9 +26,8 @@ public class TodoTaskQueries(ToDoListDbContext context,
         try
         {
             var todoTask = await context.TodoTasks
-                .AsNoTracking()
                 .Where(x => x.Id == id)
-                .Select(x => new TodoTaskViewModel(x.Name, x.Description, x.DueDate, x.Status))
+                .Select(x => new TodoTaskViewModel(x.Id, x.Name, x.Description, x.DueDate, x.Status))
                 .FirstOrDefaultAsync(cancellationToken);
 
             if (todoTask is null)

@@ -67,11 +67,11 @@ public class TodoTaskController : BaseController<CreateTodoTaskCommand, TodoTask
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [SwaggerResponse(201, "The execution was successful")]
     [SwaggerResponse(400, "The request was invalid")]
-    [HttpGet("{id}")]
+    [HttpGet("{Id}")]
     [MapToApiVersion("1.0")]
-    public override async Task<ActionResult<Result>> FindByIdAsync(int id, [FromServices] TodoTaskServices services, CancellationToken cancellationToken)
+    public override async Task<ActionResult<Result>> FindByIdAsync(int Id, [FromServices] TodoTaskServices services, CancellationToken cancellationToken)
     {
-        var todoTask = await services._queries.FindByIdAsync(id, cancellationToken);
+        var todoTask = await services._queries.FindByIdAsync(Id, cancellationToken);
 
         return Ok(todoTask);
     }
@@ -90,11 +90,11 @@ public class TodoTaskController : BaseController<CreateTodoTaskCommand, TodoTask
     [SwaggerResponse(200, "The execution was successful")]
     [SwaggerResponse(400, "The request was invalid")]
     [Consumes("application/json")]
-    [HttpPut("{id}")]
+    [HttpPut("{Id}")]
     [MapToApiVersion("1.0")]
-    public override async Task<ActionResult<Result>> Update([FromBody] CreateTodoTaskCommand commmand, [FromServices] TodoTaskServices services, CancellationToken cancellationToken)
+    public override async Task<ActionResult<Result>> Update(int Id, [FromBody] CreateTodoTaskCommand commmand, [FromServices] TodoTaskServices services, CancellationToken cancellationToken)
     {
-        var updateCommand = new UpdateTodoTaskCommand(commmand.Name, commmand.Description, commmand.DueDate, commmand.Status);
+        var updateCommand = new UpdateTodoTaskCommand(Id, commmand.Name, commmand.Description, commmand.DueDate, commmand.Status);
 
         var updateResult = await _mediator.Send(updateCommand, cancellationToken);
 
