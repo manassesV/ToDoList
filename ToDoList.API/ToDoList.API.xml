@@ -41,5 +41,14 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:ToDoList.API.Controllers.TodoTaskController.Delete(System.Int32,ToDoList.API.Services.TodoTaskServices,System.Threading.CancellationToken)">
+            <summary>
+            Deletes a TodoTask
+            </summary>
+            <param name="Id"></param>
+            <param name="services"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

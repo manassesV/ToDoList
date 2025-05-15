@@ -111,7 +111,7 @@ public class TodoTaskController : BaseController<CreateTodoTaskCommand, TodoTask
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [SwaggerResponse(201, "The execution was successful")]
     [SwaggerResponse(400, "The request was invalid")]
-    [HttpGet("{Id}")]
+    [HttpDelete("{Id}")]
     [MapToApiVersion("1.0")]
     public override async Task<ActionResult<Result>> Delete(int Id, [FromServices] TodoTaskServices services, CancellationToken cancellationToken)
     {

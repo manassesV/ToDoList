@@ -15,10 +15,6 @@ public class TodoTaskValidation: AbstractValidator<TodoTask>
         RuleFor(c => c.DueDate)
             .NotEmpty().WithMessage("DueDate is required")
             .Must(BeValidDate).WithMessage("DueDate must be a valid date");
-
-        RuleFor(c => c.Status)
-            .IsInEnum().WithMessage("Status must be a valid enum value")
-            .NotEmpty().WithMessage("Status is required");
     }
 
     private bool BeValidDate(DateTime date)
