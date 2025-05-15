@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ToDoList.API</name>
+    </assembly>
+    <members>
+        <member name="M:ToDoList.API.Controllers.TodoTaskController.Add(ToDoList.Application.Commands.CreateTodoTaskCommand,ToDoList.API.Services.TodoTaskServices,System.Threading.CancellationToken)">
+            <summary>
+            Creates a new TodoTask
+            </summary>
+            <typeparam name="CreateTodoTaskCommand"></typeparam>
+            <param name="commmand"></param>
+            <param name="services"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoList.API.Controllers.TodoTaskController.FindAllAsync(ToDoList.API.Services.TodoTaskServices,System.Threading.CancellationToken)">
+            <summary>
+            Finds all TodoTasks
+            </summary>
+            <param name="services"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoList.API.Controllers.TodoTaskController.FindByIdAsync(System.Int32,ToDoList.API.Services.TodoTaskServices,System.Threading.CancellationToken)">
+            <summary>
+            Finds a TodoTask by id
+            </summary>
+            <param name="id"></param>
+            <param name="services"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ToDoList.API.Controllers.TodoTaskController.Update(ToDoList.Application.Commands.CreateTodoTaskCommand,ToDoList.API.Services.TodoTaskServices,System.Threading.CancellationToken)">
+            <summary>
+            Updates a TodoTask
+            </summary>
+            <typeparam name="UpdateTodoTaskCommand"></typeparam>
+            <param name="commmand"></param>
+            <param name="services"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
