@@ -1,12 +1,11 @@
-
 # 📋 ToDoList API
 
-[![.NET](https://img.shields.io/badge/.NET-7.0-blue)](https://dotnet.microsoft.com/)
-[![Entity Framework Core](https://img.shields.io/badge/EF%20Core-7.0-green)](https://docs.microsoft.com/ef/)
-[![Swagger](https://img.shields.io/badge/Swagger-Enabled-yellow)](https://swagger.io/)
+[![.NET](https://img.shields.io/badge/.NET-7.0-blue)](https://dotnet.microsoft.com/)  
+[![Entity Framework Core](https://img.shields.io/badge/EF%20Core-7.0-green)](https://docs.microsoft.com/ef/)  
+[![Swagger](https://img.shields.io/badge/Swagger-Enabled-yellow)](https://swagger.io/)  
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
-API REST para gerenciamento de tarefas (ToDo), utilizando boas práticas como CQRS, MediatR, versionamento de API, validações e documentação via Swagger.
+API REST para gerenciamento de tarefas (ToDo), implementando boas práticas como CQRS, MediatR, versionamento de API, validações e documentação via Swagger.
 
 ---
 
@@ -14,14 +13,14 @@ API REST para gerenciamento de tarefas (ToDo), utilizando boas práticas como CQ
 
 - ASP.NET Core 7
 - MediatR
-- Entity Framework Core
+- Entity Framework Core 7
 - API Versioning
 - Swagger / Swashbuckle
 - FluentValidation
 
 ---
 
-## 📁 Estrutura de Pastas
+## 📁 Estrutura do Projeto
 
 ```
 ToDoList/
@@ -41,11 +40,13 @@ ToDoList/
 │   └── Migrations/
 ```
 
+![Arquitetura do projeto](https://github.com/user-attachments/assets/04fdc5d6-dd74-4d5d-9f02-85c22bee988f)
+
 ---
 
 ## 📦 Como Executar
 
-### 1. Clonar o repositório
+### 1. Clone o repositório
 
 ```bash
 git clone https://github.com/seu-usuario/todolist.git
@@ -59,21 +60,32 @@ dotnet restore
 dotnet build
 ```
 
-### 3. Aplicar as migrations
+### 3. Configure a string de conexão
 
-```bash
-dotnet ef migrations add NomeDaMigration --project .\ToDoList.Infrastructure --startup-project .\ToDoList.API
+Altere a string de conexão no arquivo `appsettings.json`:
 
-dotnet ef database update NomeDaMigration --project .\ToDoList.Infrastructure --startup-project .\ToDoList.API
+```json
+"ConnectionStrings": {
+  "todolistdb": "Server=(LocalDb)\MSSQLLocalDB;Database=todolistdb;Trusted_Connection=True;"
+}
 ```
 
-### 4. Executar a aplicação
+### 4. Aplicar as migrations
 
 ```bash
-dotnet run --project .\ToDoList.API
+dotnet ef migrations add NomeDaMigration --project ./ToDoList.Infrastructure --startup-project ./ToDoList.API
+dotnet ef database update --project ./ToDoList.Infrastructure --startup-project ./ToDoList.API
 ```
 
-### 5. Acessar o Swagger
+### 5. Executar a aplicação
+
+```bash
+dotnet run --project ./ToDoList.API
+```
+
+### 6. Acessar a documentação Swagger
+
+Abra no navegador:
 
 ```
 https://localhost:{porta}/swagger
@@ -83,12 +95,12 @@ https://localhost:{porta}/swagger
 
 ## 📘 Endpoints da API (v1)
 
-| Método | Rota                      | Descrição                      |
-|--------|---------------------------|--------------------------------|
-| POST   | /api/v1/TodoTask          | Cria uma nova tarefa           |
-| GET    | /api/v1/TodoTask          | Lista todas as tarefas         |
-| GET    | /api/v1/TodoTask/{id}     | Busca uma tarefa por ID        |
-| PUT    | /api/v1/TodoTask/{id}     | Atualiza uma tarefa existente  |
+| Método | Rota                   | Descrição                     |
+|--------|------------------------|-------------------------------|
+| POST   | /api/v1/TodoTask       | Cria uma nova tarefa          |
+| GET    | /api/v1/TodoTask       | Lista todas as tarefas        |
+| GET    | /api/v1/TodoTask/{id}  | Busca uma tarefa pelo ID      |
+| PUT    | /api/v1/TodoTask/{id}  | Atualiza uma tarefa existente |
 
 ---
 
@@ -112,13 +124,13 @@ https://localhost:{porta}/swagger
 ### Criar uma nova migration
 
 ```bash
-dotnet ef migrations add NomeDaMigration --project .\ToDoList.Infrastructure --startup-project .\ToDoList.API
+dotnet ef migrations add NomeDaMigration --project ./ToDoList.Infrastructure --startup-project ./ToDoList.API
 ```
 
 ### Atualizar o banco de dados
 
 ```bash
-dotnet ef database update --project .\ToDoList.Infrastructure --startup-project .\ToDoList.API
+dotnet ef database update --project ./ToDoList.Infrastructure --startup-project ./ToDoList.API
 ```
 
 ---
