@@ -11,17 +11,18 @@ public class TodoTask: Entity, IAggregateRoot
     public string Name { get; private set; }
     public string Description { get; private set; }
     public DateTime DueDate { get; private set; }
-    public Status Status { get; private set; } = Status.Pending;
-    public void Update(string name, string description, DateTime dueDate)
+    public bool Status { get; private set; }
+    public void Update(string name, string description, DateTime dueDate, bool status)
     {   
         Name = name;
         Description = description;
         DueDate = dueDate;
+        Status = status;
     }
 
-    public void UpdateStatus(Status status)
+    public void Pending()
     {
-        Status = status;
+        Status = false;
     }
 
     public bool isValid()

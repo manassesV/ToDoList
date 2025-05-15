@@ -1,6 +1,3 @@
-using Swashbuckle.AspNetCore.Annotations;
-using ToDoList.Application.Commands;
-
 namespace ToDoList.API.Controllers;
 
 [ApiController]

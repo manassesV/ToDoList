@@ -33,4 +33,10 @@ public class TodoTaskRepository : ITodoTaskRepository
     {
         return _context.TodoTasks.Update(todoTask).Entity;
     }
+
+    public TodoTask Delete(TodoTask todoTask)
+    {
+        return _context.TodoTasks.Remove(todoTask).Entity;
+
+    }
 }

@@ -5,6 +5,6 @@ public record UpdateTodoTaskCommand(
     string Name,
     string Description,
     DateTime DueDate,
-    Status Status
+    bool Status
 ):IRequest<Result>;
 

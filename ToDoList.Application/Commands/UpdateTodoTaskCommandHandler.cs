@@ -15,38 +15,32 @@ public class UpdateTodoTaskCommandHandler : IRequestHandler<UpdateTodoTaskComman
     {
         try
         {
-            var todoTask = new TodoTask(request.Name, request.Description, request.DueDate);
+            var todoTask = await _todoTaskRepository.FindByIdAsync(request.Id);
 
-            if (!todoTask.isValid())
+            if (todoTask is null)
             {
-                _logger.LogError("TodoTask {Name} is not valid", request.Name);
-                var errorMessages = string.Join("; ", todoTask.ValidationResult.Errors.Select(e => e.ErrorMessage));
-
-                _logger.LogWarning("Validation failed for TodoTask '{Name}': {Errors}", request.Name, errorMessages);
-
-
-                return Result.Failure(errorMessages);
+                _logger.LogWarning("TodoTask com ID {Id} não encontrada", request.Id);
+                return Result.Failure("TodoTask não encontrada");
             }
 
+            todoTask.Update(request.Name, request.Description, request.DueDate, request.Status);
             _todoTaskRepository.Update(todoTask);
-            var saveSucced = await _todoTaskRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-           
 
-            if (!saveSucced) { 
-                _logger.LogError("Error saving TodoTask {Name}", request.Name);
+            var updatted = await _todoTaskRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
-                return Result.Failure("Error saving TodoTask");
+            if (!updatted)
+            {
+                _logger.LogError("Erro ao salvar a TodoTask '{Name}'", request.Name);
+                return Result.Failure("Erro ao salvar a TodoTask");
             }
 
-            _logger.LogInformation("TodoTask '{Name}' criada com sucesso.", request.Name);
-
-            return Result.Success();
+            _logger.LogInformation("TodoTask '{Name}' atualizada com sucesso.", request.Name);
+            return Result.Success(); // ou Success(todoTask)
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Exceção ao criar TodoTask '{Name}'", request.Name);
-
-            return Result.Failure("Erro ao salvar TodoTask");
+            _logger.LogError(ex, "Exceção ao atualizar a TodoTask '{Name}'", request.Name);
+            return Result.Failure("Erro ao atualizar a TodoTask");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ToDoList.API.Swagger;
+﻿using System.Text.Json.Serialization;
+using ToDoList.API.Swagger;
 
 namespace ToDoList.API;
 
@@ -8,7 +9,11 @@ public static class GlobalExtension
     {
         var services = builder.Services;
 
-        services.AddControllers();
+        services.AddControllers()
+             .AddJsonOptions(options =>
+             {
+                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+             });
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         builder.Services.AddCors(options =>

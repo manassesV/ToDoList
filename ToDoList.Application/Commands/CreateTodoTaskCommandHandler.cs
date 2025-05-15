@@ -16,6 +16,7 @@ public class CreateTodoTaskCommandHandler : IRequestHandler<CreateTodoTaskComman
         try
         {
             var todoTask = new TodoTask(request.Name, request.Description, request.DueDate);
+            todoTask.Pending();
 
             if (!todoTask.isValid())
             {
