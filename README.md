@@ -62,7 +62,9 @@ dotnet build
 ### 3. Aplicar as migrations
 
 ```bash
-dotnet ef database update --project .\ToDoList.Infrastructure --startup-project .\ToDoList.API
+dotnet ef migrations add NomeDaMigration --project .\ToDoList.Infrastructure --startup-project .\ToDoList.API
+
+dotnet ef database update NomeDaMigration --project .\ToDoList.Infrastructure --startup-project .\ToDoList.API
 ```
 
 ### 4. Executar a aplicação
